@@ -1,11 +1,6 @@
 package goxtream
 
 import (
-	"encoding/json"
-	"fmt"
-	"io"
-	"net/http"
-
 	"github.com/thibaultlonguepee/go-xtream/internal/dtos"
 )
 
@@ -24,27 +19,15 @@ func NewSource(url, username, password string) *Source {
 }
 
 func (src *Source) Authenticate() (*Authentication, error) {
-	url := fmt.Sprintf(AuthenticationFormat, src.url, src.username, src.password)
-	resp, err := http.Get(url)
+	response, err := tryGetParsed[dtos.AuthResult](AuthenticationFormat, src.url, src.username, src.password)
 	if err != nil {
 		return nil, err
 	}
 
-	body, err := io.ReadAll(resp.Body)
+	auth, err := parseAuthentication(response)
 	if err != nil {
 		return nil, err
 	}
 
-	var auth dtos.AuthResult
-	err = json.Unmarshal(body, &auth)
-	if err != nil {
-		return nil, err
-	}
-
-	connection, err := parseAuthentication(auth)
-	if err != nil {
-		return nil, err
-	}
-
-	return connection, nil
+	return auth, nil
 }
