@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/thibaultlonguepee/go-xtream/internal/dtos"
+	"github.com/thibaultlonguepee/goxtream/internal/dtos"
 )
 
 type Authentication struct {

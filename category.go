@@ -3,7 +3,7 @@ package goxtream
 import (
 	"strconv"
 
-	"github.com/thibaultlonguepee/go-xtream/internal/dtos"
+	"github.com/thibaultlonguepee/goxtream/internal/dtos"
 )
 
 type Category struct {

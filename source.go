@@ -1,7 +1,7 @@
 package goxtream
 
 import (
-	"github.com/thibaultlonguepee/go-xtream/internal/dtos"
+	"github.com/thibaultlonguepee/goxtream/internal/dtos"
 )
 
 type Source struct {
