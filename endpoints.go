@@ -8,7 +8,7 @@ const (
 	SeriesCategoriesUrl string = AuthenticationUrl + "&action=get_series_categories"
 
 	LiveStreamsUrl         string = AuthenticationUrl + "&action=get_live_streams"
-	VodStreamsUrl          string = AuthenticationUrl + "&action=get_vod_streams"
 	CategoryLiveStreamsUrl string = AuthenticationUrl + "&action=get_live_streams&category_id=%v"
+	VodStreamsUrl          string = AuthenticationUrl + "&action=get_vod_streams"
 	CategoryVodStreamsUrl  string = AuthenticationUrl + "&action=get_vod_streams&category_id=%v"
 )
