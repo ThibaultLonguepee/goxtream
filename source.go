@@ -32,8 +32,8 @@ func (src *Source) Authenticate() (*Authentication, error) {
 	return auth, nil
 }
 
-func (src *Source) GetLiveCategories() ([]*Category, error) {
-	response, err := tryGetParsed[[]dtos.CategoryResult](LiveCategoriesUrl, src.url, src.username, src.password)
+func (src *Source) getCategories(url string) ([]*Category, error) {
+	response, err := tryGetParsed[[]dtos.CategoryResult](url, src.url, src.username, src.password)
 	if err != nil {
 		return nil, err
 	}
@@ -44,4 +44,16 @@ func (src *Source) GetLiveCategories() ([]*Category, error) {
 	}
 
 	return auth, nil
+}
+
+func (src *Source) GetLiveCategories() ([]*Category, error) {
+	return src.getCategories(LiveCategoriesUrl)
+}
+
+func (src *Source) GetVodCategories() ([]*Category, error) {
+	return src.getCategories(VodCategoriesUrl)
+}
+
+func (src *Source) GetSeriesCategories() ([]*Category, error) {
+	return src.getCategories(SeriesCategoriesUrl)
 }
