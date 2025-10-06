@@ -1,8 +1,6 @@
 package goxtream
 
-import (
-	"github.com/thibaultlonguepee/goxtream/internal/dtos"
-)
+import "github.com/thibaultlonguepee/goxtream/internal"
 
 type Source struct {
 	url      string
@@ -19,41 +17,17 @@ func NewSource(url, username, password string) *Source {
 }
 
 func (src *Source) Authenticate() (*Authentication, error) {
-	response, err := tryGetParsed[dtos.AuthResult](AuthenticationUrl, src.url, src.username, src.password)
-	if err != nil {
-		return nil, err
-	}
-
-	auth, err := parseAuthentication(response)
-	if err != nil {
-		return nil, err
-	}
-
-	return auth, nil
-}
-
-func (src *Source) getCategories(url string) ([]*Category, error) {
-	response, err := tryGetParsed[[]dtos.CategoryResult](url, src.url, src.username, src.password)
-	if err != nil {
-		return nil, err
-	}
-
-	auth, err := parseCategories(*response)
-	if err != nil {
-		return nil, err
-	}
-
-	return auth, nil
+	return internal.TryGetParsed(parseAuthentication, AuthenticationUrl, src.url, src.username, src.password)
 }
 
 func (src *Source) GetLiveCategories() ([]*Category, error) {
-	return src.getCategories(LiveCategoriesUrl)
+	return internal.TryGetParsed(parseCategories, LiveCategoriesUrl, src.url, src.username, src.password)
 }
 
 func (src *Source) GetVodCategories() ([]*Category, error) {
-	return src.getCategories(VodCategoriesUrl)
+	return internal.TryGetParsed(parseCategories, VodCategoriesUrl, src.url, src.username, src.password)
 }
 
 func (src *Source) GetSeriesCategories() ([]*Category, error) {
-	return src.getCategories(SeriesCategoriesUrl)
+	return internal.TryGetParsed(parseCategories, SeriesCategoriesUrl, src.url, src.username, src.password)
 }

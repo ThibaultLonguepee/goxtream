@@ -13,7 +13,7 @@ type Authentication struct {
 	Server *Server
 }
 
-func parseAuthentication(info *dtos.AuthResult) (*Authentication, error) {
+func parseAuthentication(info dtos.AuthResult) (*Authentication, error) {
 	user, err := parseUser(info.UserInfo)
 	if err != nil {
 		return nil, err
