@@ -51,3 +51,11 @@ func (src *Source) GetVodStreams() ([]*models.VodStream, error) {
 func (src *Source) GetCategoryVodStreams(category int) ([]*models.VodStream, error) {
 	return internal.TryGetParsed(mappers.ParseVodStreams, CategoryVodStreamsUrl, src.url, src.username, src.password, category)
 }
+
+func (src *Source) GetShows() ([]*models.Show, error) {
+	return internal.TryGetParsed(mappers.ParseShows, ShowsUrl, src.url, src.username, src.password)
+}
+
+func (src *Source) GetCategoryShows(category int) ([]*models.Show, error) {
+	return internal.TryGetParsed(mappers.ParseShows, CategoryShowsUrl, src.url, src.username, src.password, category)
+}

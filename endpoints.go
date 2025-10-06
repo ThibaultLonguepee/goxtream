@@ -11,4 +11,6 @@ const (
 	CategoryLiveStreamsUrl string = AuthenticationUrl + "&action=get_live_streams&category_id=%v"
 	VodStreamsUrl          string = AuthenticationUrl + "&action=get_vod_streams"
 	CategoryVodStreamsUrl  string = AuthenticationUrl + "&action=get_vod_streams&category_id=%v"
+	ShowsUrl               string = AuthenticationUrl + "&action=get_series"
+	CategoryShowsUrl       string = AuthenticationUrl + "&action=get_series&category_id=%v"
 )
