@@ -11,6 +11,7 @@ func TryGetContent[Dto any](endpoint string, params ...any) (Dto, error) {
 	var content Dto
 
 	url := fmt.Sprintf(endpoint, params...)
+	fmt.Println(url)
 	resp, err := http.Get(url)
 	if err != nil {
 		return content, err
@@ -29,7 +30,7 @@ func TryGetContent[Dto any](endpoint string, params ...any) (Dto, error) {
 	return content, nil
 }
 
-func TryGetParsed[Model, Dto any](parser func(Dto) (Model, error), endpoint string, params ...any) (Model, error) {
+func TryGetParsed[Model, Dto any](Parser func(Dto) (Model, error), endpoint string, params ...any) (Model, error) {
 	var model Model
 
 	content, err := TryGetContent[Dto](endpoint, params...)
@@ -37,7 +38,7 @@ func TryGetParsed[Model, Dto any](parser func(Dto) (Model, error), endpoint stri
 		return model, err
 	}
 
-	model, err = parser(content)
+	model, err = Parser(content)
 	if err != nil {
 		return model, err
 	}
