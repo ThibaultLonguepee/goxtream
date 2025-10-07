@@ -1,6 +1,11 @@
 package models
 
-import "time"
+import (
+	"fmt"
+	"time"
+
+	"github.com/thibaultlonguepee/goxtream/internal/endpoints"
+)
 
 type Show struct {
 	Id               int
@@ -59,4 +64,8 @@ type Episode struct {
 	Duration     int
 	AdditionDate time.Time
 	Extension    string
+}
+
+func (vod *Episode) GetStreamingLink(account *Account) string {
+	return fmt.Sprintf(endpoints.EpisodeUri, account.Server.Url, account.User.Name, account.User.Password, vod.Id, vod.Extension)
 }

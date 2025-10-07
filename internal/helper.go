@@ -5,13 +5,14 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+
+	"github.com/thibaultlonguepee/goxtream/models"
 )
 
-func TryGetContent[Dto any](endpoint string, params ...any) (Dto, error) {
+func tryGetContent[Dto any](endpoint string, params ...any) (Dto, error) {
 	var content Dto
 
 	url := fmt.Sprintf(endpoint, params...)
-	fmt.Println(url)
 	resp, err := http.Get(url)
 	if err != nil {
 		return content, err
@@ -30,10 +31,11 @@ func TryGetContent[Dto any](endpoint string, params ...any) (Dto, error) {
 	return content, nil
 }
 
-func TryGetParsed[Model, Dto any](Parser func(Dto) (Model, error), endpoint string, params ...any) (Model, error) {
+func TryGetParsed[Model, Dto any](Parser func(Dto) (Model, error), endpoint string, creds *models.Credentials, params ...any) (Model, error) {
 	var model Model
 
-	content, err := TryGetContent[Dto](endpoint, params...)
+	combined := append([]any{creds.Url, creds.Username, creds.Password}, params...)
+	content, err := tryGetContent[Dto](endpoint, combined...)
 	if err != nil {
 		return model, err
 	}

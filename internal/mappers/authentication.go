@@ -9,7 +9,7 @@ import (
 	"github.com/thibaultlonguepee/goxtream/models"
 )
 
-func ParseAuthentication(info dtos.AuthResult) (*models.Authentication, error) {
+func ParseAccount(info dtos.AuthResult) (*models.Account, error) {
 	user, err := ParseUser(info.UserInfo)
 	if err != nil {
 		return nil, err
@@ -20,7 +20,7 @@ func ParseAuthentication(info dtos.AuthResult) (*models.Authentication, error) {
 		return nil, err
 	}
 
-	return &models.Authentication{
+	return &models.Account{
 		User:   user,
 		Server: server,
 	}, nil

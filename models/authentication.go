@@ -4,7 +4,13 @@ import (
 	"time"
 )
 
-type Authentication struct {
+type Credentials struct {
+	Url      string
+	Username string
+	Password string
+}
+
+type Account struct {
 	User   *User
 	Server *Server
 }
