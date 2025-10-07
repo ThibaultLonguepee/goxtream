@@ -59,3 +59,7 @@ func (src *Source) GetShows() ([]*models.Show, error) {
 func (src *Source) GetCategoryShows(category int) ([]*models.Show, error) {
 	return internal.TryGetParsed(mappers.ParseShows, CategoryShowsUrl, src.url, src.username, src.password, category)
 }
+
+func (src *Source) GetShowDetails(show int) (*models.ShowDetails, error) {
+	return internal.TryGetParsed(mappers.ParseShowDetails, ShowDetailsUrl, src.url, src.username, src.password, show)
+}

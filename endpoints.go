@@ -13,4 +13,7 @@ const (
 	CategoryVodStreamsUrl  string = AuthenticationUrl + "&action=get_vod_streams&category_id=%v"
 	ShowsUrl               string = AuthenticationUrl + "&action=get_series"
 	CategoryShowsUrl       string = AuthenticationUrl + "&action=get_series&category_id=%v"
+
+	VodDetailsUrl  string = AuthenticationUrl + "&action=get_vod_info&vod_id=%v"
+	ShowDetailsUrl string = AuthenticationUrl + "&action=get_series_info&series_id=%v"
 )

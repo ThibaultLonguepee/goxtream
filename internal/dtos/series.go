@@ -20,9 +20,9 @@ type SeriesResult struct {
 }
 
 type SeriesDetailsResult struct {
-	Seasons []SeriesSeason    `json:"seasons"`
-	Info    SeriesInfo        `json:"info"`
-	Episode [][]SeriesEpisode `json:"episodes"`
+	Seasons  []SeriesSeason          `json:"seasons"`
+	Info     SeriesInfo              `json:"info"`
+	Episodes map[int][]SeriesEpisode `json:"episodes"`
 }
 
 type SeriesSeason struct {
