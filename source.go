@@ -21,45 +21,49 @@ func NewSource(url, username, password string) *Source {
 }
 
 func (src *Source) Authenticate() (*models.Authentication, error) {
-	return internal.TryGetParsed(mappers.ParseAuthentication, AuthenticationUrl, src.url, src.username, src.password)
+	return internal.TryGetParsed(mappers.ParseAuthentication, authenticationUrl, src.url, src.username, src.password)
 }
 
 func (src *Source) GetLiveCategories() ([]*models.Category, error) {
-	return internal.TryGetParsed(mappers.ParseCategories, LiveCategoriesUrl, src.url, src.username, src.password)
+	return internal.TryGetParsed(mappers.ParseCategories, liveCategoriesUrl, src.url, src.username, src.password)
 }
 
 func (src *Source) GetVodCategories() ([]*models.Category, error) {
-	return internal.TryGetParsed(mappers.ParseCategories, VodCategoriesUrl, src.url, src.username, src.password)
+	return internal.TryGetParsed(mappers.ParseCategories, vodCategoriesUrl, src.url, src.username, src.password)
 }
 
 func (src *Source) GetSeriesCategories() ([]*models.Category, error) {
-	return internal.TryGetParsed(mappers.ParseCategories, SeriesCategoriesUrl, src.url, src.username, src.password)
+	return internal.TryGetParsed(mappers.ParseCategories, showCategoriesUrl, src.url, src.username, src.password)
 }
 
 func (src *Source) GetLiveStreams() ([]*models.LiveStream, error) {
-	return internal.TryGetParsed(mappers.ParseLiveStreams, LiveStreamsUrl, src.url, src.username, src.password)
+	return internal.TryGetParsed(mappers.ParseLiveStreams, liveStreamsUrl, src.url, src.username, src.password)
 }
 
 func (src *Source) GetCategoryLiveStreams(category int) ([]*models.LiveStream, error) {
-	return internal.TryGetParsed(mappers.ParseLiveStreams, CategoryLiveStreamsUrl, src.url, src.username, src.password, category)
+	return internal.TryGetParsed(mappers.ParseLiveStreams, categoryLiveStreamsUrl, src.url, src.username, src.password, category)
 }
 
 func (src *Source) GetVodStreams() ([]*models.Vod, error) {
-	return internal.TryGetParsed(mappers.ParseVodStreams, VodStreamsUrl, src.url, src.username, src.password)
+	return internal.TryGetParsed(mappers.ParseVods, vodStreamsUrl, src.url, src.username, src.password)
 }
 
 func (src *Source) GetCategoryVodStreams(category int) ([]*models.Vod, error) {
-	return internal.TryGetParsed(mappers.ParseVodStreams, CategoryVodStreamsUrl, src.url, src.username, src.password, category)
+	return internal.TryGetParsed(mappers.ParseVods, categoryVodStreamsUrl, src.url, src.username, src.password, category)
+}
+
+func (src *Source) GetVodDetails(vod int) (*models.VodDetails, error) {
+	return internal.TryGetParsed(mappers.ParseVodDetails, vodDetailsUrl, src.url, src.username, src.password, vod)
 }
 
 func (src *Source) GetShows() ([]*models.Show, error) {
-	return internal.TryGetParsed(mappers.ParseShows, ShowsUrl, src.url, src.username, src.password)
+	return internal.TryGetParsed(mappers.ParseShows, showsUrl, src.url, src.username, src.password)
 }
 
 func (src *Source) GetCategoryShows(category int) ([]*models.Show, error) {
-	return internal.TryGetParsed(mappers.ParseShows, CategoryShowsUrl, src.url, src.username, src.password, category)
+	return internal.TryGetParsed(mappers.ParseShows, categoryShowsUrl, src.url, src.username, src.password, category)
 }
 
 func (src *Source) GetShowDetails(show int) (*models.ShowDetails, error) {
-	return internal.TryGetParsed(mappers.ParseShowDetails, ShowDetailsUrl, src.url, src.username, src.password, show)
+	return internal.TryGetParsed(mappers.ParseShowDetails, showDetailsUrl, src.url, src.username, src.password, show)
 }
