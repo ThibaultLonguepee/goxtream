@@ -44,11 +44,11 @@ func (src *Source) GetCategoryLiveStreams(category int) ([]*models.LiveStream, e
 	return internal.TryGetParsed(mappers.ParseLiveStreams, CategoryLiveStreamsUrl, src.url, src.username, src.password, category)
 }
 
-func (src *Source) GetVodStreams() ([]*models.VodStream, error) {
+func (src *Source) GetVodStreams() ([]*models.Vod, error) {
 	return internal.TryGetParsed(mappers.ParseVodStreams, VodStreamsUrl, src.url, src.username, src.password)
 }
 
-func (src *Source) GetCategoryVodStreams(category int) ([]*models.VodStream, error) {
+func (src *Source) GetCategoryVodStreams(category int) ([]*models.Vod, error) {
 	return internal.TryGetParsed(mappers.ParseVodStreams, CategoryVodStreamsUrl, src.url, src.username, src.password, category)
 }
 

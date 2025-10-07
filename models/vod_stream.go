@@ -2,7 +2,7 @@ package models
 
 import "time"
 
-type VodStream struct {
+type Vod struct {
 	Id           int
 	Number       int
 	Name         string

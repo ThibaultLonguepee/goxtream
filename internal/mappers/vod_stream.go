@@ -9,7 +9,7 @@ import (
 	"github.com/thibaultlonguepee/goxtream/models"
 )
 
-func ParseVodStream(src dtos.VodStreamResult) (*models.VodStream, error) {
+func ParseVodStream(src dtos.VodStreamResult) (*models.Vod, error) {
 	added, err := strconv.Atoi(src.Added)
 	if err != nil {
 		return nil, errors.New("wrong format for Vod stream addition date")
@@ -20,7 +20,7 @@ func ParseVodStream(src dtos.VodStreamResult) (*models.VodStream, error) {
 		return nil, errors.New("wrong format for Vod stream category id")
 	}
 
-	return &models.VodStream{
+	return &models.Vod{
 		Id:           src.StreamId,
 		Number:       src.Num,
 		Name:         src.Name,
@@ -33,8 +33,8 @@ func ParseVodStream(src dtos.VodStreamResult) (*models.VodStream, error) {
 	}, nil
 }
 
-func ParseVodStreams(srcs []dtos.VodStreamResult) ([]*models.VodStream, error) {
-	streams := make([]*models.VodStream, 0)
+func ParseVodStreams(srcs []dtos.VodStreamResult) ([]*models.Vod, error) {
+	streams := make([]*models.Vod, 0)
 	for _, s := range srcs {
 		stream, err := ParseVodStream(s)
 		if err != nil {
