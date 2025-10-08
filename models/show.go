@@ -42,6 +42,15 @@ type ShowDetails struct {
 	Seasons          []*Season
 }
 
+func (show *ShowDetails) GetSeason(number int) *Season {
+	for _, season := range show.Seasons {
+		if season.Number == number {
+			return season
+		}
+	}
+	return nil
+}
+
 type Season struct {
 	Id       int
 	Number   int
@@ -51,6 +60,15 @@ type Season struct {
 	Rating   float64
 	Cover    string
 	Episodes []*Episode
+}
+
+func (season *Season) GetEpisode(number int) *Episode {
+	for _, episode := range season.Episodes {
+		if episode.Number == number {
+			return episode
+		}
+	}
+	return nil
 }
 
 type Episode struct {

@@ -53,6 +53,15 @@ func (src *Source) GetCategoryLiveStreams(category int) ([]*models.LiveStream, e
 	return internal.GetWithCredentials(mappers.ParseLiveStreams, endpoints.CategoryLiveStreamsUrl, src, category)
 }
 
+func (src *Source) GetLiveStreamUrls(stream int) []string {
+	links := make([]string, 0)
+	for _, format := range src.Account.User.Formats {
+		link := fmt.Sprintf(endpoints.LiveStreamUri, src.Account.Server.GetUrl(), src.Username(), src.Password(), stream, format)
+		links = append(links, link)
+	}
+	return links
+}
+
 // Vods
 
 func (src *Source) GetVodCategories() ([]*models.Category, error) {
@@ -71,6 +80,14 @@ func (src *Source) GetVodDetails(vod int) (*models.VodDetails, error) {
 	return internal.GetWithCredentials(mappers.ParseVodDetails, endpoints.VodDetailsUrl, src, vod)
 }
 
+func (src *Source) GetVodUrl(vod int) (string, error) {
+	details, err := src.GetVodDetails(vod)
+	if err != nil {
+		return "", err
+	}
+	return details.GetStreamingLink(src.Account), nil
+}
+
 // Shows
 
 func (src *Source) GetShowCategories() ([]*models.Category, error) {
@@ -87,4 +104,23 @@ func (src *Source) GetCategoryShows(category int) ([]*models.Show, error) {
 
 func (src *Source) GetShowDetails(show int) (*models.ShowDetails, error) {
 	return internal.GetWithCredentials(mappers.ParseShowDetails, endpoints.ShowDetailsUrl, src, show)
+}
+
+func (src *Source) GetEpisodeUrl(show, season, episode int) (string, error) {
+	details, err := src.GetShowDetails(show)
+	if err != nil {
+		return "", err
+	}
+
+	s := details.GetSeason(season)
+	if s == nil {
+		return "", fmt.Errorf("show '%v' doesn't have a season %v", details.Name, season)
+	}
+
+	e := s.GetEpisode(episode)
+	if e == nil {
+		return "", fmt.Errorf("show's '%v' season %v doesn't have an %v", details.Name, season, episode)
+	}
+
+	return e.GetStreamingLink(src.Account), nil
 }
