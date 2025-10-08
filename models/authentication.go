@@ -1,14 +1,9 @@
 package models
 
 import (
+	"fmt"
 	"time"
 )
-
-type Credentials struct {
-	Url      string
-	Username string
-	Password string
-}
 
 type Account struct {
 	User   *User
@@ -29,4 +24,8 @@ type Server struct {
 	Url      string
 	Port     int
 	Protocol string
+}
+
+func (srv *Server) GetUrl() string {
+	return fmt.Sprintf("%v://%v:%v", srv.Protocol, srv.Url, srv.Port)
 }

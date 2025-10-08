@@ -21,7 +21,7 @@ type LiveStream struct {
 func (live *LiveStream) GetStreamingLinks(account *Account) []string {
 	links := make([]string, 0)
 	for _, format := range account.User.Formats {
-		link := fmt.Sprintf(endpoints.LiveStreamUri, account.Server.Url, account.User.Name, account.User.Password, live.Id, format)
+		link := fmt.Sprintf(endpoints.LiveStreamUri, account.Server.GetUrl(), account.User.Name, account.User.Password, live.Id, format)
 		links = append(links, link)
 	}
 	return links

@@ -60,7 +60,8 @@ func ParseServer(info dtos.AuthServerInfo) (*models.Server, error) {
 	}
 
 	return &models.Server{
-		Url:  info.Url,
-		Port: port,
+		Url:      info.Url,
+		Port:     port,
+		Protocol: info.ServerProtocol,
 	}, nil
 }

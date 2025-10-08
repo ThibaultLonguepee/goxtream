@@ -43,5 +43,5 @@ type VodDetails struct {
 }
 
 func (vod *VodDetails) GetStreamingLink(account *Account) string {
-	return fmt.Sprintf(endpoints.VodUri, account.Server.Url, account.User.Name, account.User.Password, vod.Id, vod.Extension)
+	return fmt.Sprintf(endpoints.VodUri, account.Server.GetUrl(), account.User.Name, account.User.Password, vod.Id, vod.Extension)
 }
