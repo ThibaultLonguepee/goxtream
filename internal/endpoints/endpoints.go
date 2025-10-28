@@ -6,6 +6,7 @@ const (
 	LiveCategoriesUrl      string = AuthenticationUrl + "&action=get_live_categories"
 	LiveStreamsUrl         string = AuthenticationUrl + "&action=get_live_streams"
 	CategoryLiveStreamsUrl string = AuthenticationUrl + "&action=get_live_streams&category_id=%v"
+	LiveStreamEpgUrl       string = AuthenticationUrl + "&action=get_short_epg&stream_id=%v"
 	LiveStreamUri          string = "%v/live/%v/%v/%v.%v"
 
 	VodCategoriesUrl      string = AuthenticationUrl + "&action=get_vod_categories"

@@ -53,6 +53,10 @@ func (src *Source) GetCategoryLiveStreams(category int) ([]*models.LiveStream, e
 	return internal.GetWithCredentials(mappers.ParseLiveStreams, endpoints.CategoryLiveStreamsUrl, src, category)
 }
 
+func (src *Source) GetLiveStreamEpg(stream int) ([]*models.Epg, error) {
+	return internal.GetWithCredentials(mappers.ParseEpgs, endpoints.LiveStreamEpgUrl, src, stream)
+}
+
 func (src *Source) GetLiveStreamUrls(stream int) []string {
 	links := make([]string, 0)
 	for _, format := range src.Account.User.Formats {
